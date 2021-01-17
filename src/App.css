@@ -1,0 +1,100 @@
+img {
+    top: 0;
+    border: 0px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+}
+
+.card {
+    border: 0px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+
+    color: white;
+    background-color: #db3d44;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.privacy {
+    position: absolute;
+    margin-right: 5px;
+    right: 0px;
+    z-index: 3;
+    text-align: right;
+}
+
+.title {
+    top: 250px;
+    font-size: large;
+}
+.desc{
+    font-size: medium;
+}
+.date {
+    font-size: small;
+}
+
+.card-item {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.form-group {
+    display: flex;
+}
+.form-control:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+label {
+    margin-right: 30px;
+}
+form {
+    width: 70%;
+}
+
+.btn-file{
+    margin: 10px;
+    height: 35px;
+    width: 40%;
+}
+
+.form-btn {
+    color: white;
+    width: 80px;
+    height: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#title {
+    box-sizing:border-box;
+}
+
+#modal-header{
+    text-align: center;
+}
+
+#login {
+    background-color: #db3d44;
+}
+
+#signup {
+    background-color: #d49598;
+}
+
+#btn-add {
+    color: #db3d44;
+    border: none !important;
+    border-color: transparent !important;
+    background-color: white;
+}
+
+.col-md-4 {
+   text-align: center; 
+}
