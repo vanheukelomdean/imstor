@@ -8,13 +8,10 @@ const cors = require('cors');
 const images = require('./routes/imageRoutes.js');
 const users = require('./routes/userRoutes.js');
 
-const DB_NAME = "imstor";
-const GEN_USER = "imstor_general";
-const GEN_PWD = "imgrepo";
+const mongoKeys = require('./config.js');
 
-const MONGO_URI = "mongodb+srv://" + GEN_USER + ":" + GEN_PWD + "@cluster0.kcbul.gcp.mongodb.net/" + DB_NAME + "?retryWrites=true&w=majority";
+const MONGO_URI = "mongodb+srv://" + mongoKeys.GEN_USER + ":" + mongoKeys.GEN_PWD + "@cluster0.kcbul.gcp.mongodb.net/" + mongoKeys.DB_NAME + "?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 3000;
-
 
 mongoose.connect(MONGO_URI, {
     useUnifiedTopology: true,

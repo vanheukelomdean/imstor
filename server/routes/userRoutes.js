@@ -2,8 +2,7 @@ const express = require('express');
     path = require('path');
     cors = require('cors')
     async = require('async');
-
-const mongoose = require('mongoose');
+    
 const UserModel = require('../models/userModel.js');
 
 const router = express.Router();
