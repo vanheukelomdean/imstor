@@ -5,7 +5,7 @@ img {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
-    z-index: 1;
+    z-index: auto;
 }
 
 .card {
@@ -21,19 +21,37 @@ img {
 
 .privacy {
     position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    left: 0px;
+    z-index: 3;
+    text-align: left;
+}
+
+.delete {
+    position: absolute;
+    margin-top: 5px;
     margin-right: 5px;
     right: 0px;
     z-index: 3;
     text-align: right;
+    color: white;
+
+}
+.btn-delete{
+    border-color: transparent !important;
+    background-color: white;
 }
 
 .title {
     top: 250px;
     font-size: large;
 }
+
 .desc{
     font-size: medium;
 }
+
 .date {
     font-size: small;
 }
@@ -97,4 +115,9 @@ form {
 
 .col-md-4 {
    text-align: center; 
+}
+
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Container, Col, Row, Card} from 'react-bootstrap';
+import {Container, Col, Row, Card, Button} from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment'
 import ImageModal from './ImageModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 //import imageRoutes from './server/routes/imageRoutes';
 
 function encode(data){
@@ -15,6 +15,14 @@ function encode(data){
 
 function getImages(email) {
   return axios.get(`http://localhost:3000/api/images/viewPublic`, {params: {email: email}}).then(response => {
+    return response.data;
+  })
+}
+
+function remove(filename) {
+  console.log( {file: filename})
+  return axios.post(`http://localhost:3000/api/images/remove`, {}, {params: {file: filename}}).then(response => {
+    console.log(response.data)
     return response.data;
   })
 }
@@ -49,14 +57,31 @@ class Images extends React.Component{
     this.forceUpdate();
   }
 
+  onRemove(index) {
+    var array = [...this.state.imgs];
+    console.log("onremove " + index + " " + array[index].record.path)
+    remove(array[index].record.path);
+    array.splice(index, 1);
+    this.setState({imgs: array});
+  }
+
   render() {
     return (
       <Container>
           <Row>    
           <ImageModal user={this.state.user} rerenderParentCallback={this.rerenderParentCallback}/>
             {this.state.imgs.map((img, index) => 
+
               <Col className = "col-md-4">
                   <Card>
+                    {
+                      img.record.email && img.record.email == this.state.user.email &&
+                      <button type="submit" title="Remove Image" className="btn-delete" onClick={this.onRemove.bind(this, index)}>
+                        <FontAwesomeIcon icon={faTrash} className="delete" style={{ fontSize: '1.5em' }}/>
+                      </button>
+
+                    }
+
                     <FontAwesomeIcon icon={img.record.private? faEyeSlash: faEye} className="privacy" style={{ fontSize: '1.5em' }}/>
                     <img src={`data:image/jpeg;base64,${encode(img.file)}`} />
                     <Card.Body>

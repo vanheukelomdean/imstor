@@ -149,8 +149,31 @@ router.post('/upload', upload.array('file'), function (req, res) {
             });
         }
     })();
-
     res.send('Successfully uploaded ' + req.files + ' files!')
 });
+
+
+router.post('/remove', function (req, res) {
+    let filename = req.query.file;
+    console.log(req.query);
+    (async () => {
+        await ImageModel.deleteMany({path: filename});
+
+        const params = {
+            Bucket: BUCKET_NAME,
+            Key: filename
+        };
+
+        s3.deleteObject(params, function(err, data) {
+            if (err) 
+                console.log(err);                
+        });
+
+        res.send("Deleted " + filename);
+    })();
+
+});
+
+
 
 module.exports = router;

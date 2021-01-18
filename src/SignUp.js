@@ -13,7 +13,7 @@ function getUsers(user) {
 }
 
 function addUser(user) {
-    return axios.post(`http://localhost:3000/api/users/addUser`, {params: user}).then(response => {
+    return axios.post(`http://localhost:3000/api/users/addUser`, {}, {params: {user: user}}).then(response => {
       return response.data;
     })
 }
@@ -27,6 +27,7 @@ class Signup extends React.Component {
             pwd1: "", pwd1Feedback: {class: "", message: "", valid: false}, 
             pwd2: "", pwd2Feedback: {class: "", message: "", valid: false},
             email: "", emailFeedback: {class: "", message: "", valid: false},
+            setUser: this.props.setUser,
             redirect: false
         };
 
@@ -131,10 +132,12 @@ class Signup extends React.Component {
         console.log(this.state.nameFeedback.valid, this.state.pwd1Feedback.valid, this.state.pwd2Feedback.valid, this.state.emailFeedback.valid)
         if (this.state.nameFeedback.valid&&this.state.pwd1Feedback.valid&&this.state.pwd2Feedback.valid&&this.state.emailFeedback.valid){
             const user =  {email: this.state.email, 
-                                password: this.state.password, 
-                                name: this.state.name};
+                            password: this.state.pwd1, 
+                            name: this.state.name};
 
             addUser(user);
+
+            this.props.setUser(user);
 
             this.setState({redirect: true,
                             user: user});

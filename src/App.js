@@ -1,15 +1,14 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, NavLink, Redirect} from 'react-router-dom';
-import Switch from 'react-bootstrap/esm/Switch';
-import Images from './Images';
-import Login from './Login';
-import SignUp from './SignUp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faImages, faSearch, faUser} from '@fortawesome/free-solid-svg-icons';
-
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-
+import Home from './Home';
+import Login from './Login';
+import Profile from './Profile';
+import SignUp from './SignUp';
+import Images from './Images';
 import './App.css';
 
 class App extends React.Component {
@@ -22,8 +21,6 @@ class App extends React.Component {
     this.getInitialState();
 
     this.setUser = this.setUser.bind(this);
-
-
   }
 
   setUser (user) {
@@ -48,7 +45,6 @@ class App extends React.Component {
     }
 
   render() {
-    console.log(this.state)
     return (
       <Router>
         <Route render={({ location, history }) => (
@@ -87,21 +83,16 @@ class App extends React.Component {
                         Images
                     </NavText>
                 </NavItem>
-                <NavItem eventKey="search">
-                    <NavIcon>
-                        <FontAwesomeIcon icon={faSearch} style={{ fontSize: '1.75em' }}/>
-                    </NavIcon>
-                    <NavText>
-                        Search
-                    </NavText>
-                </NavItem>
             </SideNav.Nav>
         </SideNav>
 
         <main>
-          <Route path="/images" render={(props) => (<Images user = {this.state.user} {...props}/>)}/>
-          <Route path="/login" render={(props) => (<Login setUser = {this.setUser}/>)}/>
-          <Route path="/signup" render={(props) => (<SignUp />)}/>
+            <Route path="/home" render={(props) => (<Home />)}/>
+            <Route path="/images" render={(props) => (<Images user = {this.state.user} {...props}/>)}/>
+            <Route path="/login" render={(props) => (this.state.user? 
+                                                    <Profile user = {this.state.user} setUser = {this.setUser}/>: 
+                                                    <Login setUser = {this.setUser}/>)}/>
+            <Route path="/signup" render={(props) => (<SignUp setUser = {this.setUser}/>)}/>
         </main>
         </React.Fragment>
         )}

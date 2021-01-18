@@ -15,6 +15,7 @@ const customStyles = {
       right                 : 'auto',
       bottom                : 'auto',
       transform             : 'translate(-50%, -50%)',
+      "z-index"             :  '1'
     }
   };
 
@@ -75,7 +76,6 @@ class ImageModal extends React.Component{
 
         axios.post("http://localhost:3000/api/images/upload", data, {params: files});
 
-        console.log("refresh")
         this.props.rerenderParentCallback();
     }
 
@@ -86,7 +86,7 @@ class ImageModal extends React.Component{
 
     render() {
         return (
-                <Col className="col-md-4">
+            <Col className="col-md-4">
                 <button id="btn-add"  type="submit" title="Add Images" onClick={this.openModal.bind(this)}>
                     <FontAwesomeIcon icon={faPlus} style={{ fontSize: '10em' }}/>
                 </button>
@@ -95,8 +95,7 @@ class ImageModal extends React.Component{
                     onAfterOpen={this.afterOpenModal.bind(this)}
                     onRequestClose={this.closeModal.bind(this)}
                     style={customStyles}
-                    contentLabel="Example Modal"
-                >
+                    contentLabel="Example Modal">
                     
                     <form>
                         <h4 id="modal-header"> Add Images</h4>
@@ -117,10 +116,9 @@ class ImageModal extends React.Component{
                             <button type="button" className="btn btn-success btn-block btn-file" id="file-submit" onClick={this.onSubmit.bind(this)}>Upload</button>
                             <button type="button" className="btn btn-danger btn-block btn-file" id="file-cancel" onClick={this.closeModal.bind(this)}>Close</button> 
                         </Row> 
-
                     </form>
                 </Modal>
-                </Col>
+            </Col>
         )
     }
   }

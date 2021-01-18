@@ -2,7 +2,7 @@ const express = require('express');
     path = require('path');
     cors = require('cors')
     async = require('async');
-    
+
 const UserModel = require('../models/userModel.js');
 
 const router = express.Router();
@@ -16,13 +16,13 @@ router.get('/getUsers', function (req, res) {
 });
 
 router.post('/addUser', function (req, res) {
-    let new_user = req.query.user;
+    let new_user = JSON.parse(req.query.user);
+    console.log(new_user);
     (async () => {
         const r = await UserModel.create(new_user, function (err) {
             if (err) 
-                res.send(false);
+                console.log(err);
         });
-
         res.send(true);
     })();
 });
