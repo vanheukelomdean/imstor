@@ -30,9 +30,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+    app.use(express.static('build'));
 
-    const serve_path = path.resolve(__dirname, 'client', 'build');
+    const serve_path = path.resolve(__dirname, 'build');
 
     app.get('/*', (req, res) => {
         res.sendFile(serve_path);
