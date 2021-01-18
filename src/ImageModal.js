@@ -76,7 +76,7 @@ class ImageModal extends React.Component{
 
         this.closeModal();
 
-        axios.post(DOMAIN + "/api/images/upload", data, {params: files});
+        axios.post("/api/images/upload", data, {params: files});
 
         this.props.rerenderParentCallback();
     }

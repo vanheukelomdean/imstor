@@ -6,9 +6,10 @@ class Home extends React.Component{
   constructor(props){
     super(props);
 
-    this.state = { user: this.props.user,
-                    redirect: false
-                };
+    this.state = { 
+        user: this.props.user,
+        redirect: false
+    };
   }
 
   handleSubmit() {

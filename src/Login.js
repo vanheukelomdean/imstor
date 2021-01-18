@@ -6,7 +6,7 @@ import axios from 'axios';
 const DOMAIN = "https://imstor.herokuapp.com"
 
 function login(user) {
-    return axios.get(DOMAIN + `/users/login`, { params: user}).then(response => {
+    return axios.get(`/api/users/login`, { params: user}).then(response => {
       return response.data;
     })
 }

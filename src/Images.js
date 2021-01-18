@@ -6,7 +6,6 @@ import ImageModal from './ImageModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
-const DOMAIN = "https://imstor.herokuapp.com";
 
 function encode(data){
   let buf = Buffer.from(data);
@@ -15,14 +14,13 @@ function encode(data){
 }
 
 function getImages(email) {
-  return axios.get(DOMAIN + `/api/images/viewPublic`, {params: {email: email}}).then(response => {
+  return axios.get(`/api/images/viewPublic`, {params: {email: email}}).then(response => {
     return response.data;
   })
 }
 
 function remove(filename) {
-  console.log( {file: filename})
-  return axios.post(DOMAIN + `/api/images/remove`, {}, {params: {file: filename}}).then(response => {
+  return axios.post(`/api/images/remove`, {}, {params: {file: filename}}).then(response => {
     console.log(response.data)
     return response.data;
   })
@@ -60,7 +58,6 @@ class Images extends React.Component{
 
   onRemove(index) {
     var array = [...this.state.imgs];
-    console.log("onremove " + index + " " + array[index].record.path)
     remove(array[index].record.path);
     array.splice(index, 1);
     this.setState({imgs: array});
@@ -72,7 +69,6 @@ class Images extends React.Component{
           <Row>    
           <ImageModal user={this.state.user} rerenderParentCallback={this.rerenderParentCallback}/>
             {this.state.imgs.map((img, index) => 
-
               <Col className = "col-md-4">
                   <Card>
                     {
@@ -80,9 +76,7 @@ class Images extends React.Component{
                       <button type="submit" title="Remove Image" className="btn-delete" onClick={this.onRemove.bind(this, index)}>
                         <FontAwesomeIcon icon={faTrash} className="delete" style={{ fontSize: '1.5em' }}/>
                       </button>
-
                     }
-
                     <FontAwesomeIcon icon={img.record.private? faEyeSlash: faEye} className="privacy" style={{ fontSize: '1.5em' }}/>
                     <img src={`data:image/jpeg;base64,${encode(img.file)}`} />
                     <Card.Body>
