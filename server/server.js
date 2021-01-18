@@ -29,7 +29,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-console.log(process.env.Node_ENV);
+console.log(process.env);
 if (process.env.Node_ENV === 'production') {
     const serve_path = path.resolve(__dirname, '..', 'build', 'index.html');
     console.log("Serving " + serve_path);
