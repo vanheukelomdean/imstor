@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
-    const serve_path = path.resolve(__dirname, 'build', 'index.html');
+    const serve_path = path.resolve(__dirname, '..', 'build', 'index.html');
     console.log("Serving " + serve_path);
     app.use(express.static('build'));
     app.get('/*', (req, res) => {
