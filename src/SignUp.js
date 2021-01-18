@@ -3,17 +3,17 @@ import './App.css';
 import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 
+const DOMAIN = "https://imstor.herokuapp.com"
 
 function getUsers(user) {
-    console.log("ghetUSers");
-    return axios.get(`http://localhost:3000/api/users/getUsers`).then(response => {
+    return axios.get(DOMAIN + `/api/users/getUsers`).then(response => {
         console.log(response.data)
       return response.data;
     })
 }
 
 function addUser(user) {
-    return axios.post(`http://localhost:3000/api/users/addUser`, {}, {params: {user: user}}).then(response => {
+    return axios.post(DOMAIN + `/api/users/addUser`, {}, {params: {user: user}}).then(response => {
       return response.data;
     })
 }

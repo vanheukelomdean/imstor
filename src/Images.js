@@ -5,7 +5,8 @@ import moment from 'moment'
 import ImageModal from './ImageModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
-//import imageRoutes from './server/routes/imageRoutes';
+
+const DOMAIN = "https://imstor.herokuapp.com";
 
 function encode(data){
   let buf = Buffer.from(data);
@@ -14,14 +15,14 @@ function encode(data){
 }
 
 function getImages(email) {
-  return axios.get(`http://localhost:3000/api/images/viewPublic`, {params: {email: email}}).then(response => {
+  return axios.get(DOMAIN + `/api/images/viewPublic`, {params: {email: email}}).then(response => {
     return response.data;
   })
 }
 
 function remove(filename) {
   console.log( {file: filename})
-  return axios.post(`http://localhost:3000/api/images/remove`, {}, {params: {file: filename}}).then(response => {
+  return axios.post(DOMAIN + `/api/images/remove`, {}, {params: {file: filename}}).then(response => {
     console.log(response.data)
     return response.data;
   })

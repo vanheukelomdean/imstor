@@ -7,6 +7,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus} from '@fortawesome/free-solid-svg-icons';
 
+const DOMAIN = "https://imstor.herokuapp.com"
+
 const customStyles = {
     content : {
       top                   : '50%',
@@ -74,7 +76,7 @@ class ImageModal extends React.Component{
 
         this.closeModal();
 
-        axios.post("http://localhost:3000/api/images/upload", data, {params: files});
+        axios.post(DOMAIN + "/api/images/upload", data, {params: files});
 
         this.props.rerenderParentCallback();
     }

@@ -3,8 +3,10 @@ import './App.css';
 import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 
+const DOMAIN = "https://imstor.herokuapp.com"
+
 function login(user) {
-    return axios.get(`http://localhost:3000/api/users/login`, { params: user}).then(response => {
+    return axios.get(DOMAIN + `/users/login`, { params: user}).then(response => {
       return response.data;
     })
 }
