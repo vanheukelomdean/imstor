@@ -9,10 +9,9 @@ const express = require('express');
 
 const ImageModel = require('../models/imageModel.js');
 const awsKeys = require('../config.js');
-
-const BUCKET_NAME = 'dvhimstore' 
-
 const router = express.Router();
+
+const BUCKET_NAME = 'dvhimstore';
 
 AWS.config.update({
     region: awsKeys.region,
@@ -41,68 +40,7 @@ var upload = multer({
         cb(null, file.originalname)
       }
     })
-  })
-
-const view = (res, fileName) => {
-    (async function() {
-        const params = {
-            Bucket: BUCKET_NAME,
-            Key: fileName,
-        };
-
-        const data = await s3.getObject(params).promise();
-        res.send(encode(data.Body));
-    })();
-
-};
-
-const viewAll = (res) => {
-    (async () => {
-        console.log("here");
-        const params = {
-            Bucket: BUCKET_NAME,
-            Prefix: ''
-        };
-    
-        const response = await s3.listObjects(params).promise();
-
-        var images = [];
-        console.log("here");
-
-        const get = (key) => {
-            const params = {
-                Bucket: BUCKET_NAME,
-                Key: key
-            };
-    
-            return s3.getObject(params).promise();
-        };
-
-        response.Contents.forEach(file => {
-            images.push(get(file.Key));
-        });
-
-        Promise.all(images).then(function(values) {
-            res.send(values);
-        });
-    })();
-}
-
-
-function encode(data){
-    let buf = Buffer.from(data);
-    let base64 = buf.toString('base64');
-    return base64
-}
-
-router.get('/view', function (req, res) {
-    let image_key = req.query.image_key;
-    view(res, image_key);
-});
-
-router.get('/viewAll', function (req, res) {
-    viewAll(res);
-});
+  });
 
 router.get('/viewPublic', function (req, res) {
     let email = req.query.email;
@@ -172,7 +110,5 @@ router.post('/remove', function (req, res) {
     })();
 
 });
-
-
 
 module.exports = router;

@@ -4,7 +4,6 @@ const express = require('express');
     async = require('async');
 
 const UserModel = require('../models/userModel.js');
-
 const router = express.Router();
 
 
@@ -26,7 +25,6 @@ router.post('/addUser', function (req, res) {
         res.send(true);
     })();
 });
-
 
 router.get('/login', function (req, res) {
     let user_query = {  email: req.query.email,
