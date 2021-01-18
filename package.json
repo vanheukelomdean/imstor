@@ -31,7 +31,7 @@
     "react-switch": "^6.0.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "set NODE_ENV=production && node server/server.js",
     "heroku-postbuild": "npm install && npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
