@@ -20,6 +20,7 @@ AWS.config.update({
     secretAccessKey: awsKeys.secretAccessKey,
 });
 
+/*
 AWS.config.getCredentials(function(err) {
     if (err) 
         console.log(err.stack);
@@ -27,9 +28,9 @@ AWS.config.getCredentials(function(err) {
         console.log("Access key:", AWS.config.credentials.accessKeyId);
     }
 });
+*/
 
 const s3 = new AWS.S3();
-
 
 var upload = multer({
     storage: multerS3({

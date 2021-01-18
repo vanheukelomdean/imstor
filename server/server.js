@@ -29,14 +29,14 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-
 if (process.env.Node_ENV === 'production') {
+    const serve_path = path.resolve(__dirname, '..', 'build', 'index.html');
+    console.log("Serving " + serve_path);
     app.use(express.static('../build'));
     app.get('/*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
+        res.sendFile(serve_path);
     });
 }
-
 
 app.use('/api/images', images);
 app.use('/api/users', users);
