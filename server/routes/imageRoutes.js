@@ -20,15 +20,13 @@ AWS.config.update({
     secretAccessKey: awsKeys.secretAccessKey,
 });
 
-/*
 AWS.config.getCredentials(function(err) {
     if (err) 
         console.log(err.stack);
     else {
-        console.log("Access key:", AWS.config.credentials.accessKeyId);
+        console.log("Connected to S3");
     }
 });
-*/
 
 const s3 = new AWS.S3();
 
